@@ -1,10 +1,11 @@
 import { Router} from 'express'
 import {createTodo} from '../controllers/todos'
+import {getTodos} from '../controllers/todos'
 
 const router =Router();
 
-router.post('/',createTodo)
-router.get('/')
+router.post('/', createTodo)
+router.get('/', getTodos)
 router.patch('/:id')
 router.delete('/:id')
 
