@@ -5,7 +5,14 @@ let TodoList:Todo[] = [];
 
 export const createTodo: RequestHandler = (req,res,next)=>{
     const text = (req.body as {text: string}).text;
-    const newTodo = new Todo(Math.floor(Math.random()*1000), text)
+    let highestId = 0;
+    const latestItem = TodoList.forEach((item)=>{
+    if(item.id > highestId){
+      highestId = item.id;
+    }
+  })
+  highestId++;
+    const newTodo = new Todo(highestId, text)
     TodoList.push(newTodo)
     res.status(201).json({todo:newTodo})
 }

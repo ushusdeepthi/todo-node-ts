@@ -5,7 +5,14 @@ const todos_1 = require("../models/todos");
 let TodoList = [];
 const createTodo = (req, res, next) => {
     const text = req.body.text;
-    const newTodo = new todos_1.Todo(Math.floor(Math.random() * 1000), text);
+    let highestId = 0;
+    const latestItem = TodoList.forEach((item) => {
+        if (item.id > highestId) {
+            highestId = item.id;
+        }
+    });
+    highestId++;
+    const newTodo = new todos_1.Todo(highestId, text);
     TodoList.push(newTodo);
     res.status(201).json({ todo: newTodo });
 };
